@@ -47,3 +47,4 @@ gem 'mongoid', '>= 2.0.0.beta.19'
 gem 'mongoid-tree'
 
 gem 'bcrypt'
+gem 'bower-rails'
