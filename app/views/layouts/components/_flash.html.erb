@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <% if flash[:success] %>
+        <div class="alert alert-success" role="alert">
+          <% if flash[:success].is_a? Array %>
+              <ul>
+                <%= flash[:success].each do |m| %>
+                    <li><%= m %></li>
+                <% end %>
+              </ul>
+          <% else %>
+              <%= flash[:success] %>
+          <% end %>
+        </div>
+    <% end %>
+
+    <% if flash[:error] %>
+        <div class="alert alert-danger" role="alert">
+          <% if flash[:error].is_a? Array %>
+              <ul>
+                <%= flash[:error].each do |m| %>
+                    <li><%= m %></li>
+                <% end %>
+              </ul>
+          <% else %>
+              <%= flash[:error] %>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>

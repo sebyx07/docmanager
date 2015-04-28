@@ -8,6 +8,9 @@ class User
   field :password_hashed, type: String
 
   def password
+    if self.password_hashed == nil
+      return nil
+    end
     @password = Password.new(self.password_hashed)
   end
 

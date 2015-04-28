@@ -7,11 +7,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Doc manager</a>
+      <%= link_to 'Doc manager', root_path, class: 'navbar-brand' %>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to 'Login', '' %></li>
+        <% if current_user %>
+            <li><%= link_to 'Logout', logout_path, method: :post %></li>
+        <% else %>
+            <li><%= link_to 'Login', login_path %></li>
+        <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
