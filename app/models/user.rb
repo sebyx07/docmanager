@@ -6,6 +6,7 @@ class User
 
   field :username, type: String
   field :password_hashed, type: String
+  has_many :documents
 
   def password
     if self.password_hashed == nil

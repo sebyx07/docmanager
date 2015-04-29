@@ -1,6 +1,8 @@
 class Document
   include Mongoid::Document
   field :content, type: String, default: ''
+  include Mongoid::Timestamps::Updated
+  belongs_to :user
 
   def words
     content.scan(/[a-zA-Z]+/)
@@ -9,5 +11,9 @@ class Document
   def words_db
     words_down = words.map { |w| w.downcase}
     DocumentWord.any_in(value: words_down)
+  end
+
+  def slug(size)
+    content[0..size] + '...'
   end
 end

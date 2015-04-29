@@ -1,2 +1,34 @@
-<h1>Dashboard::Pages#index</h1>
-<p>Find me in app/views/dashboard/pages/index.html.erb</p>
+<div class="row">
+  <div class="col-sm-2 col-sm-offset-10">
+    <%= link_to 'Create new document', '', class: 'btn btn-info' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <h4>My documents</h4>
+    <ul class="list-group">
+      <% @users_documents.each do |doc| %>
+        <li class="list-group-item">
+            <p class="update_date"><%= doc.updated_at.strftime('last update on %d %B at %I:%M %p') %></p>
+            <p class="content"><%= doc.slug(300)%></p>
+            <p>
+              <%= link_to 'Edit', '', class: 'btn btn-success' %>
+              <%= link_to 'Destroy', '', class: 'btn btn-dangere' %>
+            </p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-sm-4">
+    <h4>Others documents</h4>
+    <ul class="list-group">
+      <% @other_documents.each do |doc| %>
+          <li class="list-group-item">
+            <p class="update_date"><%= doc.updated_at.strftime('last update on %d %B at %I:%M %p') %></p>
+            <p class="content"><%= doc.slug(150)%></p>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
