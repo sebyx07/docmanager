@@ -3,6 +3,14 @@
     <%= link_to 'Create new document', dashboard_documents_new_path, class: 'btn btn-info' %>
   </div>
 </div>
+
+<div class="row">
+  <h3>Search documents</h3>
+  <%= form_tag dashboard_search_document_path, method: :get do %>
+      <%= text_field_tag :q, nil, class: 'form-group' %>
+      <%= submit_tag('Search') %>
+  <% end %>
+</div>
 <div class="row">
   <div class="col-sm-8">
     <h4>My documents</h4>
@@ -25,7 +33,7 @@
     <ul class="list-group">
       <% @other_documents.each do |doc| %>
           <li class="list-group-item">
-            <p class="author"><%= doc.user.username %></p>
+            <p class="author"><b><%= doc.user.username %></b></p>
             <p class="update_date"><%= doc.updated_at.strftime('last update on %d %B at %I:%M %p') %></p>
             <p class="content"><%= raw(markdown(doc.content))%></p>
           </li>

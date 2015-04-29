@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :dashboard do
     get '', to: 'pages#index'
+    get 'search_document', to: 'pages#search'
+
     get 'documents/new', to: 'documents#new'
     post 'documents/new', to: 'documents#create'
     get 'documents/edit/:id', to: 'documents#edit', as: 'document_edit'
