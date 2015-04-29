@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe 'Authentication', type: :feature do
+RSpec.describe 'Documents', type: :feature do
   before(:each) do
-    @user = User.create
+    @user = User.create(username: 'omg', password: 'lol')
   end
 
   scenario 'creates a document' do
@@ -20,10 +20,6 @@ RSpec.describe 'Authentication', type: :feature do
     doc = Document.find_by(content: 'some text')
     expect(doc).not_to be nil
     expect(doc.user).to eq @user
-
-    word = DocumentWord.find_by(value: 'some')
-    expect(word).not_to be nil
-    expect(word.documents).to include doc.id
   end
 
   scenario 'updates a document' do
@@ -44,8 +40,6 @@ RSpec.describe 'Authentication', type: :feature do
 
     expect(page).to have_content('anything')
     old_word.reload
-
-    expect(old_word.documents).not_to include document.id
   end
 
   scenario 'deletes a document' do

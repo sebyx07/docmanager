@@ -31,10 +31,9 @@ class Dashboard::DocumentsController < DashboardController
   def edit_post
     begin
       @document = Document.find(params[:id])
-      old_doc = Document.new(@document.attributes)
-
+      old_content = @document.content
       if document_belongs_to_user?(@document) && @document.update(doc_params)
-        DocumentProcessorService.delay(:retry => false).update_doc(@document.id.to_s, @document.content)
+        DocumentProcessorService.delay(:retry => false).update_doc(@document.id.to_s, old_content)
         flash_success 'Document saved'
         redirect_to dashboard_path
       else
@@ -50,8 +49,9 @@ class Dashboard::DocumentsController < DashboardController
   def delete
     begin
       @document = Document.find(params[:id])
+      old_content = @document.content
       if document_belongs_to_user?(@document) && @document.destroy
-        DocumentProcessorService.delay(:retry => false).destroy_doc(@document.id.to_s)
+        DocumentProcessorService.delay(:retry => false).destroy_doc(@document.id.to_s, old_content)
         flash_success 'Document destroyed'
         redirect_to dashboard_path
       end

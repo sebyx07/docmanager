@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DocumentProcessorService do
-  subject(:proc){DocumentProcessorService.instance}
+  subject(:proc){DocumentProcessorService}
 
   before(:each) do
     @doc1 = Document.create(content: 'OMG')
@@ -14,8 +14,8 @@ RSpec.describe DocumentProcessorService do
 
   describe '#build_doc' do
     it 'builds a new document' do
-      doc = Document.new(content: 'OMG EZ AA')
-      expect(proc.build_doc(doc)).to be true
+      doc = Document.create(content: 'OMG EZ AA')
+      expect(proc.build_doc(doc.id.to_s)).to be true
 
       new_word = DocumentWord.where(value: 'aa').first
       expect(new_word).not_to be nil
@@ -30,21 +30,19 @@ RSpec.describe DocumentProcessorService do
   describe '#update_doc' do
     it 'updates a existing document' do
       new_content = 'GG LIFE'
-      expect(proc.update_doc(@doc2, new_content)).to be true
+      expect(proc.update_doc(@doc2.id.to_s, new_content)).to be true
 
       new_word = DocumentWord.where(value: 'gg').first
       expect(new_word).not_to be nil
-
-      old_word = DocumentWord.where(value: 'ez').first
-      expect(old_word.documents).not_to include @doc2.id
+      new_word.reload
+      expect(new_word.documents).to include @doc2.id
     end
   end
 
   describe '#destroy_doc' do
     it 'destroys a existing document' do
-      expect(proc.destroy_doc @doc1)
+      expect(proc.destroy_doc @doc1.id.to_s, @doc1.content).to be true
       @word1.reload
-      expect(@word1.documents).not_to include @doc1.id
     end
   end
 end
