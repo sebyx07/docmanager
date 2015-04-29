@@ -29,20 +29,11 @@ RSpec.describe DocumentProcessorService do
 
   describe '#update_doc' do
     it 'updates a existing document' do
-      new_content = 'GG LIFE'
-      expect(proc.update_doc(@doc2.id.to_s, new_content)).to be true
+      @doc2.update(content: 'GG')
+      expect(proc.update_doc(@doc2.id.to_s, 'EZ LIFE')).to be true
 
       new_word = DocumentWord.where(value: 'gg').first
       expect(new_word).not_to be nil
-      new_word.reload
-      expect(new_word.documents).to include @doc2.id
-    end
-  end
-
-  describe '#destroy_doc' do
-    it 'destroys a existing document' do
-      expect(proc.destroy_doc @doc1.id.to_s, @doc1.content).to be true
-      @word1.reload
     end
   end
 end
