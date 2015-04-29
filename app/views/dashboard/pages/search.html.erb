@@ -1,11 +1,6 @@
 <div class="row">
-  <h4>Words searched: <%= @words_searched.join(' ') %></h4>
+  <h4>Words searched: <%= @words_searched.join(', ') %></h4>
   <h4>Documents found: <%= @documents.size %></h4>
   <hr/>
-  <% @documents.each do |doc| %>
-    <p>Author: <%= doc.user.username %></p>
-    <p>Update date: <%= doc.updated_at.strftime('%d %B at %I:%M %p') %></p>
-    <p><%=raw(markdown(doc.content)) %></p>
-    <hr/>
-  <% end %>
+  <%= render partial: 'document_list', locals: { documents: @documents } %>
 </div>

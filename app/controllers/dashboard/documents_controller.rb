@@ -33,7 +33,7 @@ class Dashboard::DocumentsController < DashboardController
       @document = Document.find(params[:id])
       old_doc = Document.new(@document.attributes)
 
-      if @document.user == current_user && @document.update(doc_params)
+      if document_belongs_to_user?(@document) && @document.update(doc_params)
         DocumentProcessor.instance.update_doc(old_doc, @document.content)
         flash_success 'Document saved'
         redirect_to dashboard_path
@@ -50,7 +50,7 @@ class Dashboard::DocumentsController < DashboardController
   def delete
     begin
       @document = Document.find(params[:id])
-      if @document.destroy
+      if document_belongs_to_user?(@document) && @document.destroy
         DocumentProcessor.instance.destroy_doc(@document)
         flash_success 'Document destroyed'
         redirect_to dashboard_path
@@ -65,5 +65,9 @@ class Dashboard::DocumentsController < DashboardController
   private
   def doc_params
     params.require(:document).permit(:content)
+  end
+
+  def document_belongs_to_user?(document)
+    document.user == current_user
   end
 end

@@ -1,0 +1,16 @@
+<ul class="list-group">
+  <% documents.each do |doc| %>
+      <li class="list-group-item">
+        <p class="author"><b><%= doc.user.username %></b></p>
+        <p class="update_date"><%= doc.updated_at.strftime('last update on %d %B at %I:%M %p') %></p>
+        <p class="content"><%= raw(markdown(doc.content))%></p>
+
+        <% if doc.user == current_user %>
+            <p>
+              <%= link_to 'Edit', dashboard_document_edit_path(doc.id), class: 'btn btn-success' %>
+              <%= link_to 'Delete', dashboard_document_destroy_path(doc.id), method: :delete, class: 'btn btn-danger' %>
+            </p>
+        <% end %>
+      </li>
+  <% end %>
+</ul>
