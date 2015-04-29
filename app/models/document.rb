@@ -14,6 +14,10 @@ class Document
   end
 
   def slug(size)
-    content[0..size] + '...'
+    if content.size > size
+      content[0..size] + '...'
+    else
+      content
+    end
   end
 end

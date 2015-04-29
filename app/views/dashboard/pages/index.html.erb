@@ -13,7 +13,7 @@
             <p class="content"><%= doc.slug(300)%></p>
             <p>
               <%= link_to 'Edit', dashboard_document_edit_path(doc.id), class: 'btn btn-success' %>
-              <%= link_to 'Destroy', dashboard_document_destroy_path(doc.id), method: :delete, class: 'btn btn-danger' %>
+              <%= link_to 'Delete', dashboard_document_destroy_path(doc.id), method: :delete, class: 'btn btn-danger' %>
             </p>
         </li>
       <% end %>

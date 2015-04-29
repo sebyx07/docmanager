@@ -34,7 +34,7 @@ class Dashboard::DocumentsController < DashboardController
       old_doc = Document.new(@document.attributes)
 
       if @document.user == current_user && @document.update(doc_params)
-        DocumentProcessor.instance.build_doc(old_doc, @document.content)
+        DocumentProcessor.instance.update_doc(old_doc, @document.content)
         flash_success 'Document saved'
         redirect_to dashboard_path
       else
