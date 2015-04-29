@@ -10,14 +10,14 @@
         <br/>
 
         <%= label_tag(:password, 'Password', class: 'sr-only') %>
-        <%= f.text_field :password, placeholder: 'Password', class: 'form-control', required: 'true' %>
+        <%= f.password_field :password, placeholder: 'Password', class: 'form-control', required: 'true' %>
 
         <br/>
         <%= f.submit 'Login', class: 'btn btn-lg btn-primary btn-block' %>
 
         <br/>
 
-        <%= link_to 'Register', '' %>
+        <%= link_to 'Register', register_path %>
     <% end %>
   </div>
 </div>

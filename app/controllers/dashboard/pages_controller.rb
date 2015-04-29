@@ -6,7 +6,7 @@ class Dashboard::PagesController < DashboardController
 
   def search
     @words_searched = params[:q].split(' ')
-    @words = DocumentWord.any_in(value: @words_searched)
+    @words = DocumentWord.any_in(value: @words_searched.map { |w| w.downcase})
     ids = @words.pluck(:documents).flatten.uniq
     @documents = Document.find(ids)
   end

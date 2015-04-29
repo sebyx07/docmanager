@@ -15,9 +15,14 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   get 'login', to: 'user_authentication#login'
+
   post 'login', to: 'user_authentication#login_form'
 
   post 'logout', to: 'user_authentication#logout'
+
+  get 'register', to: 'user_authentication#register'
+
+  post 'register', to: 'user_authentication#register_form'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

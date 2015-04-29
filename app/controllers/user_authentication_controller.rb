@@ -18,6 +18,22 @@ class UserAuthenticationController < ApplicationController
     end
   end
 
+  def register
+    @user = User.new
+  end
+
+  def register_form
+    @user = User.new(user_params)
+    if @user.set_password && @user.save
+      set_session @user
+      flash_success 'Welcome to Doc Manager'
+      redirect_to dashboard_path
+    else
+      flash_error @user.errors.full_messages
+      render :register
+    end
+  end
+
   def logout
     session[:user_id] = nil
     redirect_to root_path
@@ -32,5 +48,9 @@ class UserAuthenticationController < ApplicationController
   def user_not_found
     flash_error 'User not found'
     redirect_to login_path
+  end
+
+  def user_params
+    params.require(:user).permit(:username, :password_temp, :password_temp_confirm)
   end
 end

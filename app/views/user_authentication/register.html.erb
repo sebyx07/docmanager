@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+
+    <%= form_for @user, url: {action: 'register'}, html: {class: 'login-form'} do  |f| %>
+        <h2 class="form-signin-heading">User registration</h2>
+
+        <%= label_tag(:username, 'Username', class: 'sr-only') %>
+        <%= f.text_field :username, placeholder: 'Username', class: 'form-control', autofocus: true, required: 'true' %>
+
+        <br/>
+
+        <%= label_tag(:password_temp, 'Password', class: 'sr-only') %>
+        <%= f.password_field :password_temp, placeholder: 'Password', class: 'form-control', required: 'true' %>
+
+        <br/>
+
+        <%= label_tag(:password_temp_confirm, 'Confirm password', class: 'sr-only') %>
+        <%= f.password_field :password_temp_confirm, placeholder: 'Confirm password', class: 'form-control', required: 'true' %>
+
+        <br/>
+        <%= f.submit 'Register', class: 'btn btn-lg btn-primary btn-block' %>
+
+        <br/>
+
+        <%= link_to 'Login', login_path %>
+    <% end %>
+  </div>
+</div>
