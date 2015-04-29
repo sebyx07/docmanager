@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe DocumentProcessor do
-  subject(:proc){DocumentProcessor.instance}
+RSpec.describe DocumentProcessorService do
+  subject(:proc){DocumentProcessorService.instance}
 
   before(:each) do
     @doc1 = Document.create(content: 'OMG')

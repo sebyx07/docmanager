@@ -6,7 +6,7 @@ class UserAuthenticationController < ApplicationController
   def login_form
     begin
       @user = User.find_by(username: params[:user][:username])
-      if @user && UserAuthentication.instance.authenticate(@user, params[:user][:password])
+      if @user && UserAuthenticationService.instance.authenticate(@user, params[:user][:password])
         flash_success 'Welcome ' + @user.username
         set_session @user
         redirect_to dashboard_path

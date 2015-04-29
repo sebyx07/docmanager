@@ -1,4 +1,4 @@
-class UserAuthentication
+class UserAuthenticationService
   include Singleton
 
   def authenticate(user, password)

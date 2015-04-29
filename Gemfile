@@ -53,3 +53,5 @@ gem 'bower-rails'
 
 gem 'thin'
 gem 'redcarpet'
+
+gem 'sidekiq'

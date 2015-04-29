@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe UserAuthentication do
+RSpec.describe UserAuthenticationService do
   let(:user){User.new(password: '123')}
-  subject(:auth){ UserAuthentication.instance }
+  subject(:auth){ UserAuthenticationService.instance }
 
   describe '#authenticate' do
     it 'correct password' do

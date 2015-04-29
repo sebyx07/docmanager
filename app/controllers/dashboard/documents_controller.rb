@@ -10,7 +10,7 @@ class Dashboard::DocumentsController < DashboardController
 
     if @document.save
       flash_success 'Document created'
-      DocumentProcessor.instance.build_doc(@document)
+      DocumentProcessorService.delay(:retry => false).build_doc(@document.id.to_s)
       redirect_to dashboard_path
     else
       flash_error @document.errors
@@ -34,7 +34,7 @@ class Dashboard::DocumentsController < DashboardController
       old_doc = Document.new(@document.attributes)
 
       if document_belongs_to_user?(@document) && @document.update(doc_params)
-        DocumentProcessor.instance.update_doc(old_doc, @document.content)
+        DocumentProcessorService.delay(:retry => false).update_doc(@document.id.to_s, @document.content)
         flash_success 'Document saved'
         redirect_to dashboard_path
       else
@@ -51,7 +51,7 @@ class Dashboard::DocumentsController < DashboardController
     begin
       @document = Document.find(params[:id])
       if document_belongs_to_user?(@document) && @document.destroy
-        DocumentProcessor.instance.destroy_doc(@document)
+        DocumentProcessorService.delay(:retry => false).destroy_doc(@document.id.to_s)
         flash_success 'Document destroyed'
         redirect_to dashboard_path
       end
