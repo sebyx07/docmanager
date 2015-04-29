@@ -52,3 +52,4 @@ gem 'bcrypt'
 gem 'bower-rails'
 
 gem 'thin'
+gem 'redcarpet'

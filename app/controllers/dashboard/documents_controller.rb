@@ -51,6 +51,7 @@ class Dashboard::DocumentsController < DashboardController
     begin
       @document = Document.find(params[:id])
       if @document.destroy
+        DocumentProcessor.instance.destroy_doc(@document)
         flash_success 'Document destroyed'
         redirect_to dashboard_path
       end
