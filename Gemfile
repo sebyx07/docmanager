@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'rack_session_access'
 end
 
 
@@ -49,3 +50,5 @@ gem 'mongoid-tree'
 
 gem 'bcrypt'
 gem 'bower-rails'
+
+gem 'thin'

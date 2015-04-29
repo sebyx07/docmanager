@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-2 col-sm-offset-10">
-    <%= link_to 'Create new document', '', class: 'btn btn-info' %>
+    <%= link_to 'Create new document', dashboard_documents_new_path, class: 'btn btn-info' %>
   </div>
 </div>
 <div class="row">
@@ -12,8 +12,8 @@
             <p class="update_date"><%= doc.updated_at.strftime('last update on %d %B at %I:%M %p') %></p>
             <p class="content"><%= doc.slug(300)%></p>
             <p>
-              <%= link_to 'Edit', '', class: 'btn btn-success' %>
-              <%= link_to 'Destroy', '', class: 'btn btn-dangere' %>
+              <%= link_to 'Edit', dashboard_document_edit_path(doc.id), class: 'btn btn-success' %>
+              <%= link_to 'Destroy', dashboard_document_destroy_path(doc.id), method: :delete, class: 'btn btn-danger' %>
             </p>
         </li>
       <% end %>

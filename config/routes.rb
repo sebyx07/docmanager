@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   namespace :dashboard do
     get '', to: 'pages#index'
+    get 'documents/new', to: 'documents#new'
+    post 'documents/new', to: 'documents#create'
+    get 'documents/edit/:id', to: 'documents#edit', as: 'document_edit'
+    patch 'documents/edit/:id', to: 'documents#edit_post'
+    delete 'documents/destroy/:id', to: 'documents#delete', as: 'document_destroy'
   end
 
   get 'user_authentication/login'
